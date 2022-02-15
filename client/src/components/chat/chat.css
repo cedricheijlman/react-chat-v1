@@ -1,0 +1,114 @@
+.chat {
+  height: 100vh;
+  background-color: #2c3e50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+}
+
+.chat h2 {
+  font-size: 35px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: rgb(57, 92, 156);
+}
+
+.messages {
+  width: 100%;
+  overflow-y: auto;
+  height: 80%;
+  padding: 20px 15px;
+}
+
+.message {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.messageUser {
+  margin-right: 15px;
+  min-width: 185px;
+  padding: 10px 15px;
+  max-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.message h5 {
+  font-size: 18px;
+}
+
+.message p {
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  width: 88%;
+  margin-right: 15px;
+  background-color: #bdc3c7e0;
+  padding: 20px;
+  border-radius: 7px;
+  font-weight: 400;
+}
+
+.chatBox {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: rgba(228, 229, 236, 0.534);
+  color: black;
+  width: 70%;
+  height: 80%;
+  border-radius: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.messageInput {
+  width: 100%;
+  font-size: 16px;
+  background-color: rgb(233, 236, 241);
+  height: 50px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  margin: 0 0 20px 20px;
+  padding: 10px;
+  border-radius: 5px 0 0 5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.messageInput:active,
+.messageInput:focus {
+  border: none;
+  outline: none;
+}
+
+.messageBox button {
+  background-color: #4773a0;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  margin: 0 25px 20px 0;
+  padding: 10px;
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.messageBox {
+  justify-content: space-between;
+  border-radius: 10px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
