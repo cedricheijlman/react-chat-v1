@@ -58,6 +58,26 @@ function Chat() {
               This his is a messagehis is a messagehis is a messagehis is a mes
             </p>
           </div>
+
+          <div className="message">
+            <div className="messageUser">
+              <h5>Username</h5>
+              <h6>23:22</h6>
+            </div>
+            <p>
+              This his is a messagehis is a messagehis is a messagehis is a mes
+            </p>
+          </div>
+
+          <div className="message">
+            <div className="messageUser">
+              <h5>Username</h5>
+              <h6>23:22</h6>
+            </div>
+            <p>
+              This his is a messagehis is a messagehis is a messagehis is a mes
+            </p>
+          </div>
         </div>
 
         <div className="messageBox">
