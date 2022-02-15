@@ -1,5 +1,6 @@
 import React from "react";
 import "./chat.css";
+import ChatMessage from "./ChatMessage";
 
 function Chat() {
   return (
@@ -49,15 +50,7 @@ function Chat() {
             </p>
           </div>
 
-          <div className="message">
-            <div className="messageUser">
-              <h5>Username</h5>
-              <h6>23:22</h6>
-            </div>
-            <p>
-              This his is a messagehis is a messagehis is a messagehis is a mes
-            </p>
-          </div>
+          <ChatMessage username="Joe" message="This is the message" />
 
           <div className="message">
             <div className="messageUser">
