@@ -25,7 +25,10 @@ function App() {
             />
           }
         />
-        <Route path="/chat" element={<Chat />} />
+        <Route
+          path="/chat"
+          element={<Chat username={username} roomName={roomName} />}
+        />
       </Routes>
     </div>
   );

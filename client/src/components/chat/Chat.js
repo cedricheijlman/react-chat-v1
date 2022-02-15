@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./chat.css";
 import ChatMessage from "./ChatMessage";
 
-function Chat() {
+function Chat({ roomName, username }) {
+  useEffect(() => {
+    if (!roomName || !username) {
+      document.location.href = "/";
+    }
+  }, []);
   return (
     <div className="chat">
       <div className="chatBox">
