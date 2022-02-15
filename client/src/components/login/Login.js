@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import io, { Socket } from "socket.io-client";
 import "./login.css";
-function Login() {
+function Login({ socket }) {
+  const [username, setUsername] = useState("");
+  const [roomName, setRoomName] = useState("");
+
+  const joinRoom = () => {
+    if (username !== "" && roomName !== "") {
+      socket.emit("join_room", roomName);
+    }
+  };
+
   return (
     <div className="loginPage">
       <h1>React Chat V1</h1>
 
-      <input placeholder="Username" />
+      <input
+        onChange={(e) => {
+          setUsername(e.target.value);
+        }}
+        placeholder="Username"
+      />
 
-      <input placeholder="Room Name" />
-      <button>Join Chat</button>
+      <input
+        onChange={(e) => {
+          setRoomName(e.target.value);
+        }}
+        placeholder="Room Name"
+      />
+      <button onClick={joinRoom}>Join Chat</button>
     </div>
   );
 }
