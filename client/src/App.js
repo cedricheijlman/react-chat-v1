@@ -27,7 +27,7 @@ function App() {
                 socket={socket}
               />
             ) : (
-              <Chat username={username} roomName={roomName} />
+              <Chat username={username} socket={socket} roomName={roomName} />
             )
           }
         />

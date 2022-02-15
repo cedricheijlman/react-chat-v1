@@ -24,6 +24,11 @@ io.on("connection", (socket) => {
     console.log("user joined room", roomId);
   });
 
+  socket.on("send_message", (messageData) => {
+    console.log(messageData);
+    socket.to(messageData.room).emit("receive_message", messageData);
+  });
+
   socket.on("disconnect", () => {
     console.log("user Disconnected");
   });

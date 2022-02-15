@@ -1,36 +1,45 @@
-import React, { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate, useOutlet } from "react-router-dom";
 import "./chat.css";
 import ChatMessage from "./ChatMessage";
 
-function Chat({ roomName, username }) {
+function Chat({ roomName, username, socket }) {
+  const [currentMessage, setCurrentMessage] = useState("");
+
+  const sendMessage = async () => {
+    if (currentMessage !== "") {
+      const newMessage = {
+        room: roomName,
+        username: username,
+        message: currentMessage,
+        timeSent:
+          new Date(Date.now()).getHours() +
+          ":" +
+          new Date(Date.now()).getMinutes(),
+      };
+
+      await socket.emit("send_message", newMessage);
+    }
+  };
+
+  useEffect(() => {
+    socket.on("receive_message", (messageData) => {
+      console.log(messageData);
+    });
+  }, [socket]);
+
   return (
     <div className="chat">
       <div className="chatBox">
         <div>
-          <h2>Room Name</h2>
+          <h2>
+            Room{" "}
+            <span style={{ fontStyle: "italic", color: "white" }}>
+              {roomName}
+            </span>
+          </h2>
         </div>
         <div className="messages">
-          <div className="message">
-            <div className="messageUser">
-              <h5>Usernamedddddd</h5>
-              <h6>23:22</h6>
-            </div>
-            <p>
-              This his is a messagehis is a messagehis is a messagehis is a mes
-              sagehis is a messagehis is a mes sagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              shis is a messagessagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a message messageis a message
-            </p>
-          </div>
-
           <div className="message">
             <div className="messageUser">
               <h5>Username</h5>
@@ -78,8 +87,11 @@ function Chat({ roomName, username }) {
           <input
             className="messageInput"
             placeholder="Send message to Room Name"
+            onChange={(e) => {
+              setCurrentMessage(e.target.value);
+            }}
           />
-          <button>Send Message</button>
+          <button onClick={sendMessage}>Send Message</button>
         </div>
       </div>
     </div>
