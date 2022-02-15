@@ -4,11 +4,6 @@ import "./chat.css";
 import ChatMessage from "./ChatMessage";
 
 function Chat({ roomName, username }) {
-  useEffect(() => {
-    if (!roomName || !username) {
-      document.location.href = "/";
-    }
-  }, []);
   return (
     <div className="chat">
       <div className="chatBox">

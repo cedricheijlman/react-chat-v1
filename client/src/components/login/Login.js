@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import io, { Socket } from "socket.io-client";
 import "./login.css";
-function Login({ socket, username, setUsername, roomName, setRoomName }) {
+function Login({
+  socket,
+  username,
+  setUsername,
+  roomName,
+  setRoomName,
+  setLoggedIn,
+}) {
   const joinRoom = () => {
     if (username !== "" && roomName !== "") {
       socket.emit("join_room", roomName);
+      setLoggedIn(true);
     }
   };
 

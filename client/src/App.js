@@ -10,24 +10,26 @@ const socket = io.connect("http://localhost:3001");
 function App() {
   const [username, setUsername] = useState("");
   const [roomName, setRoomName] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
     <div className="App">
       <Routes>
         <Route
           path="/"
           element={
-            <Login
-              username={username}
-              setUsername={setUsername}
-              roomName={roomName}
-              setRoomName={setRoomName}
-              socket={socket}
-            />
+            !loggedIn ? (
+              <Login
+                username={username}
+                setUsername={setUsername}
+                setLoggedIn={setLoggedIn}
+                roomName={roomName}
+                setRoomName={setRoomName}
+                socket={socket}
+              />
+            ) : (
+              <Chat username={username} roomName={roomName} />
+            )
           }
-        />
-        <Route
-          path="/chat"
-          element={<Chat username={username} roomName={roomName} />}
         />
       </Routes>
     </div>
