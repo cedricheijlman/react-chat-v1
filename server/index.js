@@ -19,9 +19,10 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("User Connected");
 
-  socket.on("join_room", (roomId) => {
+  socket.on("join_room", (roomId, username) => {
     socket.join(roomId);
-    console.log("user joined room", roomId);
+    socket.username = username;
+    socket.room = roomId;
   });
 
   socket.on("send_message", (messageData) => {
@@ -30,6 +31,14 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
+    socket.to(socket.room).emit("receive_message", {
+      username: "Server",
+      timeSent:
+        new Date(Date.now()).getHours() +
+        ":" +
+        new Date(Date.now()).getMinutes(),
+      message: `${socket.username} left the chat`,
+    });
     console.log("user Disconnected");
   });
 });

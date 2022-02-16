@@ -11,7 +11,7 @@ function Login({
 }) {
   const joinRoom = () => {
     if (username !== "" && roomName !== "") {
-      socket.emit("join_room", roomName);
+      socket.emit("join_room", roomName, username);
       setLoggedIn(true);
     }
   };
