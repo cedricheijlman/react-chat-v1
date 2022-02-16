@@ -30,6 +30,17 @@ function Chat({ roomName, username, socket }) {
     socket.on("receive_message", (messageData) => {
       setAllMessages((list) => [...list, messageData]);
     });
+
+    const newUser = {
+      username: "Server",
+      room: roomName,
+      timeSent:
+        new Date(Date.now()).getHours() +
+        ":" +
+        new Date(Date.now()).getMinutes(),
+      message: `${username} Joined the Chat`,
+    };
+    socket.emit("send_message", newUser);
   }, [socket]);
 
   return (
