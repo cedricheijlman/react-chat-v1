@@ -22,6 +22,7 @@ function Chat({ roomName, username, socket }) {
 
       await socket.emit("send_message", newMessage);
       setAllMessages((list) => [...list, newMessage]);
+      setCurrentMessage("");
     }
   };
 
@@ -56,6 +57,12 @@ function Chat({ roomName, username, socket }) {
         </ScrollToBottom>
         <div className="messageBox">
           <input
+            value={currentMessage}
+            onKeyPress={(event) => {
+              if (event.key == "Enter") {
+                sendMessage();
+              }
+            }}
             className="messageInput"
             placeholder="Send message to Room Name"
             onChange={(e) => {

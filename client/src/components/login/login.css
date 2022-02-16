@@ -8,6 +8,11 @@
   color: white;
 }
 
+.loginPage h1 {
+  font-size: 35px;
+  margin-bottom: 25px;
+}
+
 .loginPage input {
   padding: 5px 10px;
   width: 255px;
