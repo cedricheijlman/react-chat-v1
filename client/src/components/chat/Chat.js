@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, useOutlet } from "react-router-dom";
 import "./chat.css";
 import ChatMessage from "./ChatMessage";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 function Chat({ roomName, username, socket }) {
   const [currentMessage, setCurrentMessage] = useState("");
+  const [allMessages, setAllMessages] = useState([]);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
@@ -19,12 +21,14 @@ function Chat({ roomName, username, socket }) {
       };
 
       await socket.emit("send_message", newMessage);
+      setAllMessages((list) => [...list, newMessage]);
     }
   };
 
   useEffect(() => {
     socket.on("receive_message", (messageData) => {
       console.log(messageData);
+      setAllMessages((list) => [...list, messageData]);
     });
   }, [socket]);
 
@@ -39,50 +43,18 @@ function Chat({ roomName, username, socket }) {
             </span>
           </h2>
         </div>
-        <div className="messages">
-          <div className="message">
-            <div className="messageUser">
-              <h5>Username</h5>
-              <h6>23:22</h6>
-            </div>
-            <p>
-              This his is a messagehis is a messagehis is a messagehis is a mes
-              sagehis is a messagehis is a mes sagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              shis is a messagessagehis is a messagehis is a messagehis is a
-              messagehis is a messagehis is a messagehis is a messagehis is a
-              messagehis is a message messageis a message
-            </p>
-          </div>
-
-          <ChatMessage username="Joe" message="This is the message" />
-
-          <div className="message">
-            <div className="messageUser">
-              <h5>Username</h5>
-              <h6>23:22</h6>
-            </div>
-            <p>
-              This his is a messagehis is a messagehis is a messagehis is a mes
-            </p>
-          </div>
-
-          <div className="message">
-            <div className="messageUser">
-              <h5>Username</h5>
-              <h6>23:22</h6>
-            </div>
-            <p>
-              This his is a messagehis is a messagehis is a messagehis is a mes
-            </p>
-          </div>
-        </div>
-
+        <ScrollToBottom className="messages">
+          {allMessages &&
+            allMessages.map((msg) => {
+              return (
+                <ChatMessage
+                  message={msg.message}
+                  timeSent={msg.timeSent}
+                  username={msg.username}
+                />
+              );
+            })}
+        </ScrollToBottom>
         <div className="messageBox">
           <input
             className="messageInput"
