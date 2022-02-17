@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "react-chat-v1.netlify.app",
+    origin: "https://react-chat-v1.netlify.app",
   },
 });
 
